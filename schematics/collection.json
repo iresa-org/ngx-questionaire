@@ -1,0 +1,10 @@
+{
+  "schematics": {
+    "ng-add": {
+      "aliases": ["init"],
+      "factory": "./ng-add/index",
+      "schema": "./ng-add/schema.json",
+      "description": "Add ngx-metric-prefix to app module."
+    }
+  }
+}

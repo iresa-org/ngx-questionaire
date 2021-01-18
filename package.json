@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --hmr",
-    "build": "ng build",
+    "build": "ng build --prod --base-href https://iresa-org.github.io/ngx-questionaire-form/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -17,7 +17,10 @@
     "build:lib": "ng build @iresa/ngx-questionaire-form --prod && npm run copy",
     "test:lib": "ng test @iresa/ngx-questionaire-form",
     "release": "cd projects/iresa/ngx-questionaire-form && standard-version --infile ../../../CHANGELOG.md",
-    "test:lib:headless": "cross-env CI=true npm run test:lib"
+    "test:lib:headless": "cross-env CI=true npm run test:lib",
+    "publish:lib": "npm publish dist/iresa/ngx-questionaire-form",
+    "schematics:build": "tsc -p tsconfig.schematics.json && npm run schematics:copy",
+    "schematics:copy": "copyfiles schematics/collection.json dist/iresa/ngx-questionaire-form && copyfiles schematics/ng-add/schema.json dist/iresa/ngx-questionaire-form"
   },
   "private": true,
   "dependencies": {
@@ -82,7 +85,8 @@
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "npm run hooks:pre-commit && lint-staged"
+      "pre-commit": "npm run hooks:pre-commit && lint-staged",
+      "pre-push": "npm run test:lib:headless"
     }
   }
 }
