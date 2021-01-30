@@ -1,10 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'styles-variables';
 
-html,
-body {
-  height: 100%;
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
+@import 'styles-reset';
+
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+@import './themes/default-theme';
+
+@import 'styles-reset.scss-theme.scss';
+@import './prettify-angulario.scss';
+@import './app/app.component.scss-theme.scss';
+@import './app/docs/docs.component.scss-theme.scss';
+
+@mixin custom-components-theme($theme) {
+  @include app-prettyprint-theme($theme);
+  @include app-styles-reset-theme($theme);
+  @include app-component-theme($theme);
+  @include app-docs-component-theme($theme);
 }
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+
+.default-theme {
+  @include angular-material-theme($app-theme);
+  @include custom-components-theme($app-theme);
 }

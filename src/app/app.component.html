@@ -1,11 +1,25 @@
-<ngx-questionaire-form [formConfig]="formConfig" (formInit)="onFormInit($event)">
-    <div class="radio-group-container" *questionaireTemplate="let questionConfig; let index=index">
-        <p>Question: {{questionConfig.question}}</p>
-        <mat-radio-group class="example-radio-group" (change)="questionChange($event, index)">
-            <mat-radio-button *ngFor="let opt of questionConfig.options" class="example-radio-button"
-                [checked]="opt.value === questionConfig.answer" [value]="opt.value">
-                {{opt.label}}
-            </mat-radio-button>
-        </mat-radio-group>
+<div [class]="'theme-wrapper ' + theme">
+    <div class="wrapper">
+        <div class="toolbar" [style.position]="'fixed'">
+            <mat-toolbar color="primary">
+                <span routerLink="" class="branding spacer center d-inline d-sm-none"> <img [src]="logo"
+                        alt="logo" /></span>
+                <span routerLink="" class="branding spacer center d-none d-sm-inline d-md-none"><img [src]="logo"
+                        alt="logo" /> Questionaire Form Builder</span>
+                <span routerLink="" class="branding spacer d-none d-md-inline"><img [src]="logo" alt="logo" />
+                    Questionaire Form Builder
+                </span>
+
+                <a [matTooltip]="'Project Github Repository'" matTooltipPosition="before" mat-icon-button
+                    class="link d-none d-sm-inline" href="https://github.com/iresa-org/ngx-questionaire-form"
+                    target="_blank">
+                    <fa-icon [icon]="['fab', 'github']"></fa-icon>
+                </a>
+            </mat-toolbar>
+        </div>
+
+        <div class="content">
+            <router-outlet #o="outlet"></router-outlet>
+        </div>
     </div>
-</ngx-questionaire-form>
+</div>
