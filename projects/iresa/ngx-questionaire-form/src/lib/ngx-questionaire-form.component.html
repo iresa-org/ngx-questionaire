@@ -1,10 +1,6 @@
-<form [formGroup]="formService.formGroup">
-    <div *ngFor="let ctrl of formService.formArray?.controls; let i = index">
-        <ng-container *ngIf="formService.selectedIndex >= i">
-            <ng-container *ngIf="formService.formConfig[i] as formConfig">
-                <ng-container *ngTemplateOutlet="questionaireTemplate; context: {$implicit: formConfig, index: i}">
-                </ng-container>
-            </ng-container>
+<div *ngFor="let questionConfig of formService.form; let i = index">
+    <ng-container *ngIf="formService.selectedIndex >= i">
+        <ng-container *ngTemplateOutlet="questionaireTemplate; context: {$implicit: questionConfig, index: i}">
         </ng-container>
-    </div>
-</form>
+    </ng-container>
+</div>

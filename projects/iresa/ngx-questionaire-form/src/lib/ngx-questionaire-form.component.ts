@@ -24,9 +24,7 @@ export class NgxQuestionaireFormComponent implements OnInit {
 
   formGroupName = 'results';
 
-  constructor(public formService: NgxQuestionaireFormService) {
-    formService.initForm();
-  }
+  constructor(public formService: NgxQuestionaireFormService) {}
 
   ngOnInit(): void {
     this.formInit.emit(this.formService);

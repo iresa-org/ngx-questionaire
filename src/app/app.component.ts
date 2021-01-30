@@ -9,6 +9,7 @@ import { FormApi, QuestionaireConfig } from '@iresa/ngx-questionaire-form';
 })
 export class AppComponent {
   formApi!: FormApi;
+  selectedIndex!: number | void;
   formConfig: QuestionaireConfig[] = [
     { question: 'What is your favorite color?', options: [{ label: 'Red', value: 'red' }, { label: 'Yellow', value: 'yellow' }, { label: 'Blue', value: 'blue' }, { label: 'Orange', value: 'orange' }] },
     { question: 'What is your favorite color?', options: [{ label: 'Red', value: 'red' }, { label: 'Yellow', value: 'yellow' }, { label: 'Blue', value: 'blue' }, { label: 'Orange', value: 'orange' }] },
@@ -21,6 +22,6 @@ export class AppComponent {
 
   questionChange(e: MatRadioChange, idx: number): void {
     this.formApi.setValue(e.value, idx);
-    this.formApi.next();
+    this.selectedIndex = idx === this.formApi.selectedIndex ? this.formApi.next() : this.formApi.selectedIndex;
   }
 }

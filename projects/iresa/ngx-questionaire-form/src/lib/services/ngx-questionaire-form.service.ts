@@ -1,45 +1,41 @@
 import { Injectable } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { FormApi } from '../api/form.api';
 import { QuestionaireConfig } from '../api/questionaire-form.config';
 
-export const FG_NAME = 'results';
+export const ANS_NAME = 'answer';
 
 @Injectable()
 export class NgxQuestionaireFormService implements FormApi {
 
-  formGroup!: FormGroup;
-  formArray!: FormArray;
+  form!: any[];
   formConfig!: QuestionaireConfig[];
   selectedIndex = 0;
   total = 0;
 
-  constructor(private fb: FormBuilder) { }
-
-  initForm(): void {
-    this.formGroup = this.fb.group({ [FG_NAME]: this.fb.array([]) });
-    this.formArray = this.formGroup.get(FG_NAME) as FormArray;
-  }
+  constructor() { }
 
   buildForm(qConfig: QuestionaireConfig[]): void {
     this.formConfig = qConfig.length ? [...qConfig] : [];
-    this.total = this.formConfig.length;
-    const f = this.formArray.length ? this.formArray.reset() : this.formArray;
-    this.formConfig.forEach((config, id) => this.formArray?.push(this.buildQuestionaire(config, id)));
+    this.form = [...this.formConfig];
   }
 
-  buildQuestionaire(config: QuestionaireConfig, idx: number): FormGroup {
-    return this.fb.group({
-      id: config.id ?? idx,
-      selected: ''
-    });
+  setValue(value: string, index: number): string {
+    if (index >= 0 && index < this.form.length) {
+      this.form = this.form.map((item, i) => i === index ? ({...item, [ANS_NAME]: value}) : item);
+      return value;
+    }
+    throw new Error('Index out of bound');
   }
 
-  setValue(value: string, index: number): void {
-    this.formArray.at(index).get('selected')?.setValue(value);
+  next(): number {
+    if (this.selectedIndex <= this.form.length) {
+      this.selectedIndex++;
+      return this.selectedIndex;
+    }
+    throw new Error('Index out of bound');
   }
 
-  next(): void {
-    this.selectedIndex++;
+  getQuestionaireForm(): any[] {
+    return this.form;
   }
 }
