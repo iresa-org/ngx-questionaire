@@ -1,23 +1,23 @@
-<nav mat-tab-nav-bar class="d-none d-sm-flex">
-  <a mat-tab-link *ngFor="let e of examples" [active]="(currentSection$ | async) === e.id" (click)="scrollTo(e.id)">
-    {{ e.label }}
-  </a>
-</nav>
-
-<nav class="nav-responsive d-sm-none d-flex justify-content-center">
-  <mat-select [placeholder]="'anms.examples.title' " [value]="'todos'">
-    <mat-option *ngFor="let e of examples" [value]="e">
+<div *ngIf="{currentSection: currentSection$ | async} as data">
+  <nav mat-tab-nav-bar class="d-none d-sm-flex">
+    <a mat-tab-link *ngFor="let e of examples" [active]="data.currentSection?.id" (click)="onSectionChange(e)">
       {{ e.label }}
-    </mat-option>
-  </mat-select>
-</nav>
+    </a>
+  </nav>
 
-<div class="examples-container" id="parentDiv" scrollspy [spiedTags]="['DIV']"
-  (sectionChange)="onSectionChange($event)">
-  <div class="example-content" [id]="e.id" *ngFor="let e of examples">
-    <h2>{{ e.label }}</h2>
-    <app-docs-container [data]="e">
-      <ng-container *ngComponentOutlet="e.outlet"></ng-container>
-    </app-docs-container>
-  </div>
+  <nav class="nav-responsive d-sm-none d-flex justify-content-center">
+    <mat-select [placeholder]="'Feature'" (selectionChange)="onSectionChange($event.value)">
+      <mat-option *ngFor="let e of examples">
+        {{ e.label }}
+      </mat-option>
+    </mat-select>
+  </nav>
+
+  <mat-card class="container examples-container">
+    <div class="d-flex justify-content-end">
+      <a mat-button color="primary" href="{{parentLink + data.currentSection?.link}}" target="_blank">VIEW CODE</a>
+    </div>
+    <ng-template #exampleContainer></ng-template>
+  </mat-card>
+
 </div>

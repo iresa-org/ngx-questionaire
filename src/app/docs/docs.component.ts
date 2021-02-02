@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject, ChangeDetectionStrategy } from '@angular/core';
-import { IMG_FEATURES } from './docs.component.list';
-import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, ViewContainerRef, ComponentFactoryResolver, Injector, Compiler, ChangeDetectorRef, AfterViewInit } from '@angular/core';
+import * as componentList from './docs.component.list';
 import { BehaviorSubject } from 'rxjs';
+import { FeatureModel } from './docs.component.list';
 
 @Component({
   selector: 'app-docs',
@@ -9,19 +9,32 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./docs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DocsComponent implements OnInit {
-  examples = IMG_FEATURES;
-  currentSection$ = new BehaviorSubject<string>(IMG_FEATURES[0].id);
+export class DocsComponent implements OnInit, AfterViewInit {
+  @ViewChild('exampleContainer', { read: ViewContainerRef })
+  exampleContainer!: ViewContainerRef;
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  examples = componentList.FEATURES;
+  currentSection$ = new BehaviorSubject<FeatureModel>({} as FeatureModel);
+  parentLink = 'https://github.com/iresa-org/ngx-questionaire-form/tree/main/src/app/docs/examples/';
 
-  ngOnInit(): void {}
+  constructor(private cfr: ComponentFactoryResolver, private injector: Injector, private cd: ChangeDetectorRef) { }
 
-  onSectionChange(sectionId: string) {
-    this.currentSection$.next(sectionId);
+  ngOnInit(): void { }
+
+  ngAfterViewInit(): void { 
+    this.onSectionChange(componentList.FEATURES[0]);
+    this.cd.detectChanges();
   }
 
-  scrollTo(section = '') {
-    this.document?.querySelector(`# ${section}`)?.scrollIntoView();
+  onSectionChange(feature: FeatureModel) {
+    this.currentSection$.next(feature);
+    this.loadComponent(feature);
+  }
+
+  async loadComponent(feature: FeatureModel): Promise<any> {
+    this.exampleContainer.clear();
+    const componentFactory = await feature.loader(this.cfr);
+    this.exampleContainer.createComponent(componentFactory, undefined, this.injector);
+    this.cd.detectChanges();
   }
 }
