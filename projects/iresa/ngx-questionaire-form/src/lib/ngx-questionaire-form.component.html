@@ -1,6 +1,8 @@
-<div *ngFor="let questionConfig of formService.form; let i = index; trackBy:identify">
-    <div *ngIf="formService.selectedIndex >= i" @fadeIn>
-        <ng-container *ngTemplateOutlet="questionaireTemplate; context: {$implicit: questionConfig, index: i}">
-        </ng-container>
+<ng-container *ngIf="{selectedIndex: formService.selectedIndex$ | async, form: formService.form$ | async} as data">
+    <div *ngFor="let questionConfig of data.form; let i = index; trackBy:identify">
+        <div *ngIf="data.selectedIndex !== null && data.selectedIndex>= i" @fadeIn>
+            <ng-container *ngTemplateOutlet="questionaireTemplate; context: {$implicit: questionConfig, index: i}">
+            </ng-container>
+        </div>
     </div>
-</div>
+</ng-container>

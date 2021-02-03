@@ -34,7 +34,7 @@ export class NgxQuestionaireFormComponent implements OnInit {
     this.formInit.emit(this.formService);
   }
 
-  identify(index: number, item: QuestionaireConfig) {
+  identify(_: number, item: {id: string}) {
     return item.id;
   }
 }
