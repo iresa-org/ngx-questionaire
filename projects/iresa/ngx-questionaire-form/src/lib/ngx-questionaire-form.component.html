@@ -1,6 +1,6 @@
-<div *ngFor="let questionConfig of formService.form; let i = index">
-    <ng-container *ngIf="formService.selectedIndex >= i">
+<div *ngFor="let questionConfig of formService.form; let i = index; trackBy:identify">
+    <div *ngIf="formService.selectedIndex >= i" @fadeIn>
         <ng-container *ngTemplateOutlet="questionaireTemplate; context: {$implicit: questionConfig, index: i}">
         </ng-container>
-    </ng-container>
+    </div>
 </div>

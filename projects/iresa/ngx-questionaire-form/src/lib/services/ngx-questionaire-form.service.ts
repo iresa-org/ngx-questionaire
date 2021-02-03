@@ -16,6 +16,7 @@ export class NgxQuestionaireFormService implements FormApi {
 
   buildForm(qConfig: QuestionaireConfig[]): void {
     this.formConfig = qConfig.length ? [...qConfig] : [];
+    this.formConfig = this.formConfig.map((item, i) => ({...item, id: item.id ?? i}));
     this.form = [...this.formConfig];
   }
 
