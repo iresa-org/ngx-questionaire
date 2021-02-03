@@ -1,57 +1,109 @@
-<p align="center">
- <img width="20%" height="20%" src="./logo.svg">
-</p>
+# NGX-QUESTIONAIRE-FORM
 
-<br />
 
+[![npm version](https://badge.fury.io/js/%40iresa%2Fngx-questionaire-form.svg)](https://badge.fury.io/js/%40iresa%2Fngx-questionaire-form)
 [![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg?style=flat-square)]()
 [![commitizen](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)]()
 [![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)]()
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
-[![ngneat](https://img.shields.io/badge/@-ngneat-383636?style=flat-square&labelColor=8f68d4)](https://github.com/ngneat/)
-[![spectator](https://img.shields.io/badge/tested%20with-spectator-2196F3.svg?style=flat-square)]()
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 
-> The Library Slogan
+> Questionaire form builder for modern Angular apps
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid assumenda atque blanditiis cum delectus eligendi ipsam iste iure, maxime modi molestiae nihil obcaecati odit officiis pariatur quibusdam suscipit temporibus unde.
-Accusantium aliquid corporis cupiditate dolores eum exercitationem illo iure laborum minus nihil numquam odit officiis possimus quas quasi quos similique, temporibus veritatis? Exercitationem, iure magni nulla quo sapiente soluta. Esse?
+Buidling a long list of questions has never been easier. Demo: https://iresa-org.github.io/ngx-questionaire-form
 
 ## Features
 
-- ✅ One
-- ✅ Two
-- ✅ Three
+- ✅ Display a list of questions via JSON configurations
+- ✅ Allow user-generated templates
+- ✅ Support single or multiple choice answers
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [FAQ](#faq)
+- [Contributors](#contributors-)
 
 ## Installation
 
-### NPM
+From your project folder, run `ng add @iresa/ngx-questionaire-form`
 
-`npm install @iresa/ngx-questionaire-form --save-dev`
+This command will import `NgxQuestionaireFormModule` and `BrowserAnimationsModule` into your `AppModule`. If the app doesn't support animation, import `NoopAnimationsModule` instead:
 
-### Yarn
+```ts
+import { NgxQuestionaireFormModule } from '@iresa/ngx-questionaire-form';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+ 
+@NgModule({
+  ...
+  imports: [
+    ...
+    
+    BrowserAnimationsModule // NoopAnimationsModule
 
-`yarn add @iresa/ngx-questionaire-form --dev`
+    // NgxImagelyModule
+    NgxQuestionaireFormModule, 
+    ...
+  ],
+  ...
+})
+export class AppModule {}
+```
+
+Or register `NgxQuestionaireFormModule` to a feature module with following code:
+
+```ts
+import { NgxQuestionaireFormModule } from '@iresa/ngx-questionaire-form';
+ 
+@NgModule({
+  ...
+  imports: [
+    ...
+    
+    // NgxQuestionaireFormModule
+    NgxQuestionaireFormModule, 
+    ...
+  ],
+  ...
+})
+export class FeatureModule {}
+```
 
 ## Usage
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid assumenda atque blanditiis cum delectus eligendi ipsam iste iure, maxime modi molestiae nihil obcaecati odit officiis pariatur quibusdam suscipit temporibus unde.
+```html
+<ngx-questionaire-form 
+  [formConfig]="formConfig" 
+  (formInit)="onFormInit($event)">
 
-```ts
-function helloWorld() {}
+  <!-- Custom template for each question -->
+  <div *questionaireTemplate="let questionConfig; let index = index">
+    ...
+  </div>
+</ngx-questionaire-form>
 ```
 
-## FAQ
+```ts
+import { FormApi, QuestionaireConfig } from '@iresa/ngx-questionaire-form';
+  
+  formApi!: FormApi;
+  formConfig: QuestionaireConfig[] = [
+    { 
+      question: 'What is your favorite color?', 
+      options: [
+        { label: 'Red', value: 'red' }, 
+        { label: 'Yellow', value: 'yellow' }, 
+        { label: 'Blue', value: 'blue' }, 
+        { label: 'Orange', value: 'orange' }]
+    },
+    ...
+  ];
 
-## How to ...
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid assumenda atque blanditiis cum delectus eligendi ips
+  onFormInit(formApi: FormApi): void {
+    this.formApi = formApi;
+  }
+```
 
 ## Contributors ✨
 
@@ -60,11 +112,17 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
-<!-- markdownlint-enable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://iresa.medium.com/"><img src="https://avatars.githubusercontent.com/u/5092371?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Khoi Bui</b></sub></a><br /><a href="https://github.com/@iresa/ngx-questionaire-form/commits?author=kxbui" title="Code">💻</a> <a href="#content-kxbui" title="Content">🖋</a> <a href="#design-kxbui" title="Design">🎨</a> <a href="https://github.com/@iresa/ngx-questionaire-form/commits?author=kxbui" title="Documentation">📖</a> <a href="#example-kxbui" title="Examples">💡</a> <a href="#ideas-kxbui" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-kxbui" title="Maintenance">🚧</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
-<div>Icons made by <a href="http://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+This project uses schematics from [@ngneat/lib](https://github.com/ngneat/lib) to generate boilerplate used for open source library. 

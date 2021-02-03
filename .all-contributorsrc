@@ -9,6 +9,22 @@
   "imageSize": 100,
   "commit": true,
   "commitConvention": "angular",
-  "contributors": [],
+  "contributors": [
+    {
+      "login": "kxbui",
+      "name": "Khoi Bui",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5092371?v=4",
+      "profile": "https://iresa.medium.com/",
+      "contributions": [
+        "code",
+        "content",
+        "design",
+        "doc",
+        "example",
+        "ideas",
+        "maintenance"
+      ]
+    }
+  ],
   "contributorsPerLine": 7
 }
