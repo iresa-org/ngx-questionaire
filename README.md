@@ -42,7 +42,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     
     BrowserAnimationsModule // NoopAnimationsModule
 
-    // NgxImagelyModule
+    // NgxQuestionaireFormModule
     NgxQuestionaireFormModule, 
     ...
   ],
@@ -87,7 +87,7 @@ export class FeatureModule {}
 ```ts
 import { FormApi, QuestionaireConfig } from '@iresa/ngx-questionaire-form';
   
-  formApi!: FormApi;
+  formApi: FormApi;
   formConfig: QuestionaireConfig[] = [
     { 
       question: 'What is your favorite color?', 
@@ -114,7 +114,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/kxbui"><img src="https://avatars2.githubusercontent.com/u/5092371?v=4" width="100px;" alt=""/><br /><sub><b>Khoi Bui</b></sub></a><br /><a href="https://github.com/@iresa/ngx-imagely/commits?author=kxbui" title="Code">💻</a>  <a href="#design-kxbui" title="Design">🎨</a> <a href="https://github.com/@iresa/ngx-imagely/commits?author=kxbui" title="Documentation">📖</a> <a href="#ideas-kxbui" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-kxbui" title="Project Management">📆</a></td>
+    <td align="center"><a href="https://github.com/kxbui"><img src="https://avatars2.githubusercontent.com/u/5092371?v=4" width="100px;" alt=""/><br /><sub><b>Khoi Bui</b></sub></a><br /><a href="https://github.com/@iresa/ngx-questionaire-form/commits?author=kxbui" title="Code">💻</a>  <a href="#design-kxbui" title="Design">🎨</a> <a href="https://github.com/@iresa/ngx-questionaire-form/commits?author=kxbui" title="Documentation">📖</a> <a href="#ideas-kxbui" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-kxbui" title="Project Management">📆</a></td>
   </tr>
 </table>
 

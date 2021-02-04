@@ -26,7 +26,7 @@ export const MAT_COMPONENTS = [
     // material
     ...MAT_COMPONENTS,
 
-    // Imagely
+    // NgxQuestionaireFormModule
     NgxQuestionaireFormModule
   ],
   exports: [...MAT_COMPONENTS, NgxQuestionaireFormModule]

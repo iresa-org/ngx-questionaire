@@ -45,6 +45,7 @@ function addModuleToImports(projectName: string | undefined): Rule {
     const workspace = getWorkspace(host);
     const project = getProjectFromWorkspace(workspace, projectName);
 
+    addModuleImportToRootModule(host, 'BrowserAnimationsModule', '@angular/platform-browser/animations', project);
     addModuleImportToRootModule(host, `${moduleName}`, modulePath, project);
 
     return host;
